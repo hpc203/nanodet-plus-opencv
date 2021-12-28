@@ -255,7 +255,8 @@ void NanoDet_Plus::detect(Mat& srcimg)
 
 int main()
 {
-	NanoDet_Plus mynet("onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/coco.names", 320, 0.5, 0.5);  /// choice = ["picodet_m_320_coco.onnx", "picodet_m_416_coco.onnx", "picodet_s_320_coco.onnx", "picodet_s_416_coco.onnx"]
+	NanoDet_Plus mynet("onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/coco.names", 320, 0.5, 0.5);       /// choice = ["onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/nanodet-plus-m_416.onnx",
+                                 "onnxmodel/nanodet-plus-m-1.5x_320.onnx", "onnxmodel/nanodet-plus-m-1.5x_416.onnx"]
 	string imgpath = "imgs/person.jpg";
 	Mat srcimg = imread(imgpath);
 	mynet.detect(srcimg);
