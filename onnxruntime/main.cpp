@@ -270,8 +270,8 @@ void NanoDet_Plus::detect(Mat& srcimg)
 	auto allocator_info = MemoryInfo::CreateCpu(OrtDeviceAllocator, OrtMemTypeCPU);
 	Value input_tensor_ = Value::CreateTensor<float>(allocator_info, input_image_.data(), input_image_.size(), input_shape_.data(), input_shape_.size());
 
-	// 开始推理
-	vector<Value> ort_outputs = ort_session->Run(RunOptions{ nullptr }, &input_names[0], &input_tensor_, 1, output_names.data(), output_names.size());   // 开始推理
+	// 驴陋脢录脥脝脌铆
+	vector<Value> ort_outputs = ort_session->Run(RunOptions{ nullptr }, &input_names[0], &input_tensor_, 1, output_names.data(), output_names.size());   // 驴陋脢录脥脝脌铆
 	/////generate proposals
 	vector<BoxInfo> generate_boxes;
 	const float* preds = ort_outputs[0].GetTensorMutableData<float>();
@@ -297,7 +297,8 @@ void NanoDet_Plus::detect(Mat& srcimg)
 
 int main()
 {
-	NanoDet_Plus mynet("onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/coco.names", 0.5, 0.5);  /// choice = ["picodet_m_320_coco.onnx", "picodet_m_416_coco.onnx", "picodet_s_320_coco.onnx", "picodet_s_416_coco.onnx"]
+	NanoDet_Plus mynet("onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/coco.names", 0.5, 0.5);     /// choice = ["onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/nanodet-plus-m_416.onnx",
+                                 "onnxmodel/nanodet-plus-m-1.5x_320.onnx", "onnxmodel/nanodet-plus-m-1.5x_416.onnx"]
 	string imgpath = "imgs/person.jpg";
 	Mat srcimg = imread(imgpath);
 	mynet.detect(srcimg);
