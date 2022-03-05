@@ -66,10 +66,9 @@ NanoDet_Plus::NanoDet_Plus(string model_path, string classesFile, float nms_thre
 	this->nms_threshold = nms_threshold;
 	this->score_threshold = objThreshold;
 
-	std::wstring widestr = std::wstring(model_path.begin(), model_path.end());
 	//OrtStatus* status = OrtSessionOptionsAppendExecutionProvider_CUDA(sessionOptions, 0);
 	sessionOptions.SetGraphOptimizationLevel(ORT_ENABLE_BASIC);
-	ort_session = new Session(env, widestr.c_str(), sessionOptions);
+	ort_session = new Session(env, model_path.c_str(), sessionOptions);
 	size_t numInputNodes = ort_session->GetInputCount();
 	size_t numOutputNodes = ort_session->GetOutputCount();
 	AllocatorWithDefaultOptions allocator;
@@ -297,8 +296,7 @@ void NanoDet_Plus::detect(Mat& srcimg)
 
 int main()
 {
-	NanoDet_Plus mynet("onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/coco.names", 0.5, 0.5);     /// choice = ["onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/nanodet-plus-m_416.onnx",
-                                 "onnxmodel/nanodet-plus-m-1.5x_320.onnx", "onnxmodel/nanodet-plus-m-1.5x_416.onnx"]
+	NanoDet_Plus mynet("onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/coco.names", 0.5, 0.5);     /// choice = ["onnxmodel/nanodet-plus-m_320.onnx", "onnxmodel/nanodet-plus-m_416.onnx","onnxmodel/nanodet-plus-m-1.5x_320.onnx", "onnxmodel/nanodet-plus-m-1.5x_416.onnx"]
 	string imgpath = "imgs/person.jpg";
 	Mat srcimg = imread(imgpath);
 	mynet.detect(srcimg);
